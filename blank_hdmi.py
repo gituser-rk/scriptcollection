@@ -5,6 +5,7 @@
 # since this script checks every second the input status, the motion sensor must have a minimum 
 # 'on' time of 1.1 seconds at the output (2 seconds in my case working great)
 # I use this for a picture frame and a wall-mounted touchscreen
+# (c) Ronny Kröhnert - gituser_rk 2020
 
 import RPi.GPIO as GPIO
 import time
