@@ -1,6 +1,6 @@
 #!/bin/bash
 # Adhoc version - pass RasPi system hostname(s) to script as commandline argument
-DEST="/mnt/diskstation1-Daten/Backup/PiBackup"
+DEST='/mnt/diskstation1-Daten/Backup/PiBackup'
 
 if test "$#" -lt 1; then
         echo "Illegal number of parameters. At least one hostname must be provided."
