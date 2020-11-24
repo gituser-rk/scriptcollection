@@ -2,6 +2,7 @@
 # Make running hot image backup of RaspberryPi
 # The resulting image can be restored to SD Card using Etcher or so
 # I use it for automated backups using cron
+# (c) Ronny Kröhnert - gituser_rk 2020
 
 DEST='/mnt/diskstation1-Daten/Backup/PiBackup'
 
