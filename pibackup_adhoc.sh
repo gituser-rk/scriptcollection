@@ -1,5 +1,7 @@
 #!/bin/bash
 # Adhoc version - pass RasPi system hostname(s) to script as commandline argument
+# (c) Ronny Kröhnert - gituser_rk 2020
+
 DEST='/mnt/diskstation1-Daten/Backup/PiBackup'
 
 if test "$#" -lt 1; then
