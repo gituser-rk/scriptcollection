@@ -13,7 +13,6 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(17, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 GPIO.setup(27, GPIO.OUT, initial=1)
 GPIO.setup(18, GPIO.OUT)
-# ---------- Konfigurationsbereich: die Adressse des TSL2561 kann 0x29, 0x39 oder 0x49 sein
 pwm = GPIO.PWM(18, 175) # Initialize PWM on pwm Pin 18 with 175Hz frequency
 BUS = 1
 dc=50 # set dc variable to 0 for 0% duty cycle means lower value is brighter . allowed range is 0 ...100
@@ -22,14 +21,12 @@ debug = False # debug mode (True or False)
 
 input_state = GPIO.input(17)
 # ---------------------------------
-#delay = 1800 # HDMI off after this time (in seconds) if no motion is detected
-delay = 1800
+delay = 1800 # HDMI off after this time (in seconds) if no motion is detected
 TSL2561_ADDR = 0x39
-# pwm.ChangeDutyCycle(dc)       # Change duty cycle
 
-#Instanzieren eines I2C Objektes#delay = 300
+#create instance of I2C Object
 i2cBus = smbus.SMBus(BUS)
-# Starten des Messvorganges mit 402 ms (Skalierungsfaktor 1)
+# start measuring with 402 ms (scale factor 1)
 i2cBus.write_byte_data(TSL2561_ADDR, 0x80, 0x03)
 
 counter = delay
@@ -69,11 +66,11 @@ while True:
                     print('Display off')
                 else: logging.info('Display off')
     if counter < 0:
-        #prevent $counter from getting too small and negative overflow if no motion is detected for a long time
+        #prevent $counter from getting too small and negative overflow if no motion is detected for a very long time
         counter = 0
-    # Gesamthelligkeit auslesen niederwertiges Byte lesen
+    # read brightness - least significant byte
     LSB = i2cBus.read_byte_data(TSL2561_ADDR, 0x8C)
-    # hoeherwertiges Byte lesen
+    # read most significant byte
     MSB = i2cBus.read_byte_data(TSL2561_ADDR, 0x8D)
     Ambient = (MSB << 8) + LSB
     if debug == True: print("Ambient: {}".format(Ambient))
